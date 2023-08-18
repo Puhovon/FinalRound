@@ -35,14 +35,14 @@ public class PlayerAnimatorController : MonoBehaviour
         _animator.SetTrigger("Jump");
     }
 
-    private void Crouch()
+    private void Crouch(bool isCrouched)
     {
-        _animator.SetBool("Crouch", true);        
+        _animator.SetBool("Crouch", isCrouched);        
     }
     
     private void CheckRunAnim()
     {
-        if(Math.Abs(PlayerMovement._moveVector.x) > 0.1f)
+        if(Math.Abs(PlayerMovement._moveVector.x) > 0.2f)
             _animator.SetBool("Run", true);
         else
             _animator.SetBool("Run", false);

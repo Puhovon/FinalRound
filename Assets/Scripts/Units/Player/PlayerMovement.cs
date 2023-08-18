@@ -12,7 +12,7 @@ public enum PlayerStates
 public class PlayerMovement
 {
     public static Action onJumped;
-    public static Action onCrouched;
+    public static Action<bool> onCrouched;
 
     
     private PlayerStates _playerStates;
@@ -68,9 +68,10 @@ public class PlayerMovement
 
         if (_playerInput.CrouchPressed)
         {
-            onCrouched?.Invoke();
+            onCrouched?.Invoke(true);
             return PlayerStates.Crouch;
         }
+        onCrouched?.Invoke(false);
         return PlayerStates.Walk;
     }
 
