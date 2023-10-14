@@ -1,15 +1,11 @@
+using Units.Abstract;
 using UnityEngine;
 
-public abstract class Unit
+public abstract class Unit : MonoBehaviour, IDamagable
 {
-    private int _health;
-    private int _maxHealth;
-    private int _moveSpeed;
+    public abstract int _health { get; protected set; }
+    public abstract int _maxHealth { get; protected set; }
 
-    public Unit(int health, int maxHealth, int moveSpeed)
-    {
-        _health = health;
-        _maxHealth = maxHealth;
-        _moveSpeed = moveSpeed;
-    }
+
+    public abstract void ApplyDamage(int damage);
 }

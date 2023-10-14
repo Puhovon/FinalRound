@@ -1,116 +1,97 @@
-using System;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-public enum PlayerStates
+namespace Units.Player
 {
-    Jump,
-    Stay,
-    Walk,
-    Run,
-    Crouch
-}
-public class PlayerMovement
-{
-    public static Action onJumped;
-    public static Action<bool> onCrouched;
-
-    
-    private PlayerStates _playerStates;
-    private PlayerInput _playerInput;
-    
-    public static Vector3 _moveVector = new Vector3(0, 0, 0);
-    private Rigidbody _rb;
-    private Transform _transform;
-    
-    private float _jumpMaxSpeed;
-    private float _speed;
-    private float _walkMaxSpeed;
-    private float _jumpForce;
-    private float _inJumpMaxSpeed;
-    private float _runMaxSpeed;
-    private float _crouchMaxSpeed;
-
-    private float acceleration = 5;
-    private float deacceleration = 10;
-    
-    private const float ChangeMaxSpeedFactor = 6;
-
-    private float _currentMaxSpeed;
-
-    public bool OnGround = false;
-
-    
-    public PlayerMovement(Rigidbody rb, float walkMaxSpeed, float jumpForce, float jumpMaxSpeed, float runMaxSpeed, float crouchMaxSpeed)
+    public enum PlayerStates
     {
-        _rb = rb;
-        _walkMaxSpeed = walkMaxSpeed;
-        _jumpForce = jumpForce;
-        _jumpMaxSpeed = jumpMaxSpeed;
-        _runMaxSpeed = runMaxSpeed;
-        _crouchMaxSpeed = crouchMaxSpeed;
-        _playerInput = new PlayerInput();
-    }
-    
-    public void Update()
-    {
-        _playerInput.Update();
-        _playerStates = GetPlayerState();
+        IdleWalk, WithRifleWalk
     }
 
-    private PlayerStates GetPlayerState()
+    public class PlayerMovement : MonoBehaviour
     {
-        if (_playerInput.JumpPressed)
+        [Header("Player Config")]
+        [SerializeField] private float _maxSpeed;
+
+        [SerializeField] private float _jumpForce;
+        private PlayerAttack _playerAttack;
+
+        private float _currentMaxSpeed;
+        private const float ChangeMaxSpeedFactor = 6;
+        private bool OnGround = false;
+        
+        public static Vector3 MoveVector = new Vector3(0,0,0);
+        private PlayerInput _playerInput;
+        private PlayerStates _playerStates;
+        private Rigidbody _playerRb;
+
+        public static bool canMove = true;
+        private bool faceRight = true;
+        public void Initialize(PlayerAttack playerAttack)
         {
-            onJumped?.Invoke();
-            _moveVector.y = _jumpForce;
-            return PlayerStates.Jump;
+            _playerAttack = playerAttack;
+            _playerRb = GetComponent<Rigidbody>();
+            _playerInput = new PlayerInput();
+            _currentMaxSpeed = _maxSpeed;
         }
 
-        if (_playerInput.CrouchPressed)
+        private void Update()
         {
-            onCrouched?.Invoke(true);
-            return PlayerStates.Crouch;
+            _playerInput.Update();
+            _playerStates = GetPlayerState();
+            if(_playerStates == PlayerStates.WithRifleWalk && _playerInput.Fire && PlayerAttack.canFire)
+                PlayerEvents.onFired?.Invoke();
+            if (_playerInput.Movement.x > 0 && !faceRight)
+                Flip();
+            if (_playerInput.Movement.x < 0 && faceRight)
+                Flip();
         }
-        onCrouched?.Invoke(false);
-        return PlayerStates.Walk;
-    }
-
-    private void CalculateMaxSpeed()
-    {
-        float targetMaxSpeed = _playerStates switch
+        
+        private void FixedUpdate()
         {
-            PlayerStates.Run => _runMaxSpeed,
-            PlayerStates.Jump => _inJumpMaxSpeed,
-            PlayerStates.Crouch => _crouchMaxSpeed,
-            _ => _walkMaxSpeed,
-        };
-        _currentMaxSpeed = Mathf.Lerp(_currentMaxSpeed, targetMaxSpeed, Time.fixedDeltaTime * ChangeMaxSpeedFactor);
-    }
-    
-    public void FixedUpdate()
-    {
-        Move();
-        CalculateVelocityY();
-        CalculateMaxSpeed();
-        _rb.velocity = _moveVector;
-    }
-
-    private void Move()
-    {
-        if (_playerInput.Movement != Vector2.zero)
-        {
-            _moveVector = new Vector3(_playerInput.Movement.x * _currentMaxSpeed, _moveVector.y, 0);
-                        
+            if (canMove)
+            {
+                Move();
+                _playerRb.velocity = MoveVector;    
+            }
         }
-    }
 
-    private void CalculateVelocityY()
-    {
-        if (OnGround)
+        private void Flip()
         {
-            _moveVector.y = Mathf.Max(_moveVector.y, 0);
-            return;
+            Vector3 rot = _playerRb.rotation.eulerAngles;
+            rot = new Vector3(rot.x,rot.y+180,rot.z);
+            _playerRb.rotation = Quaternion.Euler(rot);
+            faceRight = !faceRight;
         }
-        _moveVector.y += Physics.gravity.y * Time.fixedDeltaTime;
+        
+        private void Move()
+        {
+            MoveVector = new Vector3(_playerInput.Movement.x * _maxSpeed, _playerRb.velocity.y, 0);
+        }
+        
+        private PlayerStates GetPlayerState()
+        {
+            if (_playerInput.JumpPressed && _playerStates == PlayerStates.IdleWalk)
+            {
+                PlayerEvents.OnJumped?.Invoke();
+                _playerRb.velocity = new Vector3(_playerRb.velocity.x, _jumpForce, 0);
+            }
+            if (_playerInput.StateWithRifle)
+            {
+                return PlayerStates.WithRifleWalk;
+            }
+            return PlayerStates.IdleWalk;
+        }
+
+        private void OnCollisionExit(Collision other)
+        {
+            OnGround = false;
+        }
+
+        private void OnCollisionStay(Collision other)
+        {
+            OnGround = true;
+        }
     }
 }

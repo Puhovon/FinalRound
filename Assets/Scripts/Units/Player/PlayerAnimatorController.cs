@@ -1,4 +1,5 @@
 using System;
+using Units.Player;
 using UnityEngine;
 
 public class PlayerAnimatorController : MonoBehaviour
@@ -6,7 +7,8 @@ public class PlayerAnimatorController : MonoBehaviour
     private Animator _animator;
     private PlayerInput _playerInput;
     
-    private void Start()
+    
+    public void Initialize()
     {
         _animator = GetComponent<Animator>();
         _playerInput = new PlayerInput();
@@ -16,35 +18,52 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         _playerInput.Update();
         CheckRunAnim();
+        // if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        //     PlayerMovement.canMove = false;
+                
     }
 
     private void OnEnable()
     {
-        PlayerMovement.onJumped += Jump;
-        PlayerMovement.onCrouched += Crouch;
+        PlayerEvents.OnJumped += Jump;
+        PlayerEvents.OnTurned += TurnBack;
+        PlayerEvents.onChangedState += ChangeState;
+        PlayerEvents.onFired += Attack;
     }
 
     private void OnDisable()
     {
-        PlayerMovement.onJumped -= Jump;
-        PlayerMovement.onCrouched -= Crouch;
+        PlayerEvents.OnJumped -= Jump;
+        PlayerEvents.OnTurned -= TurnBack;
+        PlayerEvents.onChangedState -= ChangeState;
+        PlayerEvents.onFired -= Attack;
     }
 
+    private void ChangeState(bool withRifle)
+    {
+        _animator.SetBool("WithRifle", withRifle);
+    }
+
+    private void Attack()
+    {
+        if(PlayerAttack.canFire)
+            _animator.SetTrigger("Attack");
+    }
     private void Jump()
     {
         _animator.SetTrigger("Jump");
     }
 
-    private void Crouch(bool isCrouched)
-    {
-        _animator.SetBool("Crouch", isCrouched);        
-    }
-    
     private void CheckRunAnim()
     {
-        if(Math.Abs(PlayerMovement._moveVector.x) > 0.2f)
+        if(Math.Abs(PlayerMovement.MoveVector.x) > 0.2f)
             _animator.SetBool("Run", true);
         else
             _animator.SetBool("Run", false);
-    }    
+    }
+
+    private void TurnBack()
+    {
+        _animator.SetTrigger("TurnBack");
+    }
 }
