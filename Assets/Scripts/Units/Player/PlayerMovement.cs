@@ -72,7 +72,7 @@ namespace Units.Player
         
         private PlayerStates GetPlayerState()
         {
-            if (_playerInput.JumpPressed && _playerStates == PlayerStates.IdleWalk)
+            if (_playerInput.JumpPressed && _playerStates == PlayerStates.IdleWalk && OnGround)
             {
                 PlayerEvents.OnJumped?.Invoke();
                 _playerRb.velocity = new Vector3(_playerRb.velocity.x, _jumpForce, 0);
