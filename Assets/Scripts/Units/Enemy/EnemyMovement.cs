@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Units.Player;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 

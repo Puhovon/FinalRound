@@ -1,5 +1,4 @@
-﻿using System;
-using Units.Abstract;
+﻿using Units.Abstract;
 using UnityEngine;
 
 namespace Units.Universal

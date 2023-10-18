@@ -35,7 +35,6 @@ namespace UI
 
         private void HealthChanged(int health)
         {
-            print($"Health Changed: {health}");
             _currentHpText = health;
             hpText.text = _currentHpText.ToString();
         }

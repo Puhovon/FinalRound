@@ -1,5 +1,4 @@
-﻿using System;
-using Units.Player;
+﻿using Units.Player;
 using UnityEngine;
 
 namespace Units.Enemy

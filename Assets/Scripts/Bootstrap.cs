@@ -8,10 +8,11 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private UIGame _UIGame;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerAnimatorController _playerAnimatorController;
-    private PlayerAttack _playerAttack;
     [SerializeField] private ParticleSystem gunParticle;
     [SerializeField] private int MaxAmmo;
     [SerializeField] private List<Health> _healths;
+    private PlayerAttack _playerAttack;
+
     void Start()
     {
         _playerAttack = new PlayerAttack(this,gunParticle, MaxAmmo);
