@@ -69,6 +69,7 @@ namespace Units.Player
         private void Move()
         {
             MoveVector = new Vector3(_playerInput.Movement.x * _currentMaxSpeed, _playerRb.velocity.y, 0);
+            CalculateVelocityY();
         }
         
         private PlayerStates GetPlayerState()
@@ -88,6 +89,15 @@ namespace Units.Player
             return PlayerStates.IdleWalk;
         }
 
+        private void CalculateVelocityY()
+        {
+            if (OnGround)
+            {
+                MoveVector.y = Mathf.Max(MoveVector.y, 0);
+                return;
+            }
+            MoveVector.y += Physics.gravity.y * Time.fixedDeltaTime;
+        }
         private void OnCollisionExit(Collision other)
         {
             OnGround = false;
