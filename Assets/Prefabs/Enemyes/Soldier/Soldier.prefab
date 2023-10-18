@@ -29,9 +29,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8613300157494489395}
   - {fileID: 2475042680807692406}
   - {fileID: 8638469301007556531}
-  - {fileID: 8613300157494489395}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4625264166337985193
@@ -1504,6 +1504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   _currentHealth: 0
+  psBlood: {fileID: 0}
 --- !u!114 &4761353011936777180
 MonoBehaviour:
   m_ObjectHideFlags: 0

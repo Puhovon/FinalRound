@@ -12,7 +12,8 @@ namespace Units.Player
     public class PlayerMovement : MonoBehaviour
     {
         [Header("Player Config")]
-        [SerializeField] private float _maxSpeed;
+        [SerializeField] private float _maxIdleSpeed;
+        [SerializeField] private float _maxRifleSpeed;
 
         [SerializeField] private float _jumpForce;
         private PlayerAttack _playerAttack;
@@ -33,7 +34,7 @@ namespace Units.Player
             _playerAttack = playerAttack;
             _playerRb = GetComponent<Rigidbody>();
             _playerInput = new PlayerInput();
-            _currentMaxSpeed = _maxSpeed;
+            _currentMaxSpeed = _maxIdleSpeed;
         }
 
         private void Update()
@@ -67,7 +68,7 @@ namespace Units.Player
         
         private void Move()
         {
-            MoveVector = new Vector3(_playerInput.Movement.x * _maxSpeed, _playerRb.velocity.y, 0);
+            MoveVector = new Vector3(_playerInput.Movement.x * _currentMaxSpeed, _playerRb.velocity.y, 0);
         }
         
         private PlayerStates GetPlayerState()
@@ -79,8 +80,11 @@ namespace Units.Player
             }
             if (_playerInput.StateWithRifle)
             {
+                _currentMaxSpeed = _maxRifleSpeed;
                 return PlayerStates.WithRifleWalk;
             }
+
+            _currentMaxSpeed = _maxIdleSpeed;
             return PlayerStates.IdleWalk;
         }
 

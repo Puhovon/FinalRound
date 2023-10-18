@@ -1,4 +1,5 @@
 ﻿using System;
+using Units.Player;
 using UnityEngine;
 
 namespace Units.Enemy
@@ -6,14 +7,15 @@ namespace Units.Enemy
     public class EnemyAnimationController : MonoBehaviour
     {
         private Animator _animator;
-
+        private Health _health;
         private void Awake()
         {
+            _health = GetComponent<Health>();
             _animator = GetComponent<Animator>();
             EnemyEvents.onPlayerDetect.AddListener(Detected);
             EnemyEvents.onPlayerUndetect.AddListener(Undetected);
             EnemyEvents.onWalked.AddListener(Walk);
-            EnemyEvents.onDeath.AddListener(Death);
+            _health.onDeath.AddListener(Death);
         }
 
         private void AfterDeath()

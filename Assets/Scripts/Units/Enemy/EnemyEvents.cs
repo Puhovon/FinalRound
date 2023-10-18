@@ -7,7 +7,6 @@ namespace Units.Enemy
         public static UnityEvent onPlayerDetect = new UnityEvent();
         public static UnityEvent onPlayerUndetect = new UnityEvent();
         public static UnityEvent<bool> onWalked = new UnityEvent<bool>();
-        public static UnityEvent onDeath = new UnityEvent();
         public static UnityEvent onFired = new UnityEvent();
         
         

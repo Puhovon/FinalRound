@@ -19,13 +19,16 @@ namespace Units.Universal
             try
             {
                 if (other.transform.parent.TryGetComponent(out IDamagable damagable))
+                {
                     damagable.ApplyDamage(damage);
+                    Destroy(gameObject);
+                }
+                
             }
             catch
             {
                 print("Cant confirm damage");
             }
-            Destroy(gameObject);
         }
     }
 }

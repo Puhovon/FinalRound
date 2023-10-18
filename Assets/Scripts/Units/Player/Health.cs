@@ -2,6 +2,7 @@
 using Units.Abstract;
 using Units.Enemy;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Units.Player
 {
@@ -10,18 +11,22 @@ namespace Units.Player
         [Header("Health Stats")]
         [SerializeField] private int maxHealth;
         
-        [SerializeField]private int _currentHealth;
+        [SerializeField] private int _currentHealth;
+        [SerializeField] private ParticleSystem psBlood;
+        public UnityEvent onDeath = new UnityEvent();
 
-        private void Start()
+        public void Initialize()
         {
             _currentHealth = maxHealth;
             if(transform.CompareTag("Player"))
                 UIEvents.onHealthChanged?.Invoke(_currentHealth);
         }
 
+       
         public void ApplyDamage(int damage)
         {
             _currentHealth -= damage;
+            psBlood.Play();
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
@@ -44,7 +49,7 @@ namespace Units.Player
             if (transform.CompareTag("Enemy"))
             {
                 UIEvents.onScoreChanged?.Invoke();
-                EnemyEvents.onDeath?.Invoke();
+                onDeath?.Invoke();
             }
             if (transform.TryGetComponent(out Animator animator))
                 animator.SetTrigger("Death");

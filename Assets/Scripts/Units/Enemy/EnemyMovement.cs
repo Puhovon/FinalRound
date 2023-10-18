@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Units.Player;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +13,6 @@ namespace Units.Enemy
         [SerializeField] private Transform[] points;
         [SerializeField] private float speed;
         [SerializeField] private float TimeToRevert;
-        [SerializeField] private GameObject spine;
         private float currentTimeToRevert;
         private Rigidbody rb;
         private int i;
@@ -24,6 +25,7 @@ namespace Units.Enemy
         private const int WalkState = 1;
         private const int RevertState = 2;
         private const int Detected = 3;
+        private const int Death = 4;
         
         private int currentState;
         private int previusState;
@@ -59,12 +61,11 @@ namespace Units.Enemy
                     break;
                 case WalkState:
                     agent.destination = points[i].position;
+                    print(points[i].name);
                     EnemyEvents.onWalked?.Invoke(true);
-                    if (agent.remainingDistance < 0.1f)
+                    if (agent.remainingDistance < 0.01f)
                     {
-                        print(agent.remainingDistance);
                         currentState = IdleState;
-                        print("IdleState");
                         i++;
                     }
 
@@ -72,13 +73,15 @@ namespace Units.Enemy
                 case RevertState:
                     speed *= -1;
                     currentState = WalkState;
-                    print("walkState");
                     FLip();
                     break;
                 case Detected:
                     if (!isOnDetected)
                         StartCoroutine(OnDetected());
                     break;
+                default:
+                    agent.isStopped = true;
+                    return;
             }
         }
 
@@ -86,11 +89,12 @@ namespace Units.Enemy
         {
             Destroy(GetComponent<Health>());
             Destroy(GetComponent<EnemyAttack>());
-            Destroy(this);
+            currentState = Death;
         }
 
         private IEnumerator OnDetected()
         {
+            print("On detected");
             isOnDetected = true;
             for (int i = 0; i < 3; i++)
             {
@@ -114,7 +118,6 @@ namespace Units.Enemy
             if (other.CompareTag("Player"))
             {
                 playerDetected = true;
-                spine.transform.LookAt(other.transform);
                 previusState = currentState;
                 currentQuaternion = transform.rotation;
                 EnemyEvents.onWalked?.Invoke(false);
@@ -122,7 +125,6 @@ namespace Units.Enemy
                 transform.LookAt(other.transform);
                 agent.isStopped = true;
                 currentState = Detected;
-                print("Enemy event: True");
             }
         }
 
