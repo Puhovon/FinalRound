@@ -6,10 +6,10 @@ namespace Units.Enemy
     public class EnemyAnimationController : MonoBehaviour
     {
         private Animator _animator;
-        private Health _health;
+        private EnemyHealth _health;
         private void Awake()
         {
-            _health = GetComponent<Health>();
+            _health = GetComponent<EnemyHealth>();
             _animator = GetComponent<Animator>();
             EnemyEvents.onPlayerDetect.AddListener(Detected);
             EnemyEvents.onPlayerUndetect.AddListener(Undetected);

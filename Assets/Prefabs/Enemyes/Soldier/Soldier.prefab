@@ -1332,9 +1332,6 @@ PrefabInstance:
       addedObject: {fileID: 8869673024521768767}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ca71a041bce7b94586a375e04ef6a51, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4806854995305589273}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ca71a041bce7b94586a375e04ef6a51, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4761353011936777180}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ca71a041bce7b94586a375e04ef6a51, type: 3}
       insertIndex: -1
@@ -1407,11 +1404,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.14169236, y: 0.26909804, z: 0.095984474}
   m_Center: {x: 0.02507894, y: -0.0672938, z: 0.04461572}
---- !u!1 &7330523497462757987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -7657966619581158213, guid: 4ca71a041bce7b94586a375e04ef6a51, type: 3}
-  m_PrefabInstance: {fileID: 8071065875869538008}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7617701797025605904 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 4ca71a041bce7b94586a375e04ef6a51, type: 3}
@@ -1490,21 +1482,6 @@ MonoBehaviour:
   bullet: {fileID: 2959755151082130179, guid: 537c09a211e1a8f44bdb182e4bb84e92, type: 3}
   bulletInstantiate: {fileID: 8768965822439128998}
   firePatricles: {fileID: 6997481671351434959}
---- !u!114 &4806854995305589273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8990106759116237705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b812607b62941a5a865d9322bbbe519, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  _currentHealth: 0
-  psBlood: {fileID: 0}
 --- !u!114 &4761353011936777180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,7 +1499,6 @@ MonoBehaviour:
   - {fileID: 8638469301007556531}
   speed: 2
   TimeToRevert: 4
-  spine: {fileID: 7330523497462757987}
 --- !u!114 &535844228098310442
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -257,6 +257,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47977784}
   m_CullTransparentMesh: 1
+--- !u!1 &54873926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8188115487322850193, guid: 4861f97def8bcc3439038e4bb4005f04, type: 3}
+  m_PrefabInstance: {fileID: 814103069}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &124893182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -503,24 +508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2466510311749548aa778a6364acc4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &184603999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184603994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b812607b62941a5a865d9322bbbe519, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  _currentHealth: 0
-  psBlood: {fileID: 1603086672}
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &184604000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,6 +593,24 @@ MonoBehaviour:
   - {fileID: 2068326209}
   speed: 2
   TimeToRevert: 4
+--- !u!114 &184604005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184603994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6168fcf2f34cc8bf039b1abbe771be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  _currentHealth: 0
+  psBlood: {fileID: 1603086672}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &187231754 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6810709059391405990, guid: 3b7f2c753d435d647a80f1f047a113e3, type: 3}
@@ -988,7 +993,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1769289288467033498, guid: 4861f97def8bcc3439038e4bb4005f04, type: 3}
   m_PrefabInstance: {fileID: 814103069}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 54873926}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6914f7229316b314ea95a8f922ed590c, type: 3}
@@ -999,23 +1004,30 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8736888289315287405, guid: 4861f97def8bcc3439038e4bb4005f04, type: 3}
   m_PrefabInstance: {fileID: 814103069}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 54873926}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e91279e820a94727af7cb0d16ecdf300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &553319704 stripped
+--- !u!114 &553319703
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6020245692302382474, guid: 4861f97def8bcc3439038e4bb4005f04, type: 3}
-  m_PrefabInstance: {fileID: 814103069}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 54873926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b812607b62941a5a865d9322bbbe519, type: 3}
+  m_Script: {fileID: 11500000, guid: f91552d6b3964b439c1b40caa69036c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 30
+  _currentHealth: 0
+  psBlood: {fileID: 1990549863}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &576603032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1983,13 +1995,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6020245692302382474, guid: 4861f97def8bcc3439038e4bb4005f04, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8856846587187468587, guid: 4861f97def8bcc3439038e4bb4005f04, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1990549861}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8188115487322850193, guid: 4861f97def8bcc3439038e4bb4005f04, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 553319703}
   m_SourcePrefab: {fileID: 100100000, guid: 4861f97def8bcc3439038e4bb4005f04, type: 3}
 --- !u!1 &886657714 stripped
 GameObject:
@@ -3237,10 +3253,10 @@ PrefabInstance:
       addedObject: {fileID: 184604000}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ca71a041bce7b94586a375e04ef6a51, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 184603999}
+      addedObject: {fileID: 184604004}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ca71a041bce7b94586a375e04ef6a51, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 184604004}
+      addedObject: {fileID: 184604005}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ca71a041bce7b94586a375e04ef6a51, type: 3}
       insertIndex: -1
       addedObject: {fileID: 184603997}
@@ -9227,21 +9243,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1535476769}
     - target: {fileID: 1448830596972770076, guid: 4ff7401ddea08954d86a0430699c32ae, type: 3}
+      propertyPath: _playerHealth
+      value: 
+      objectReference: {fileID: 553319703}
+    - target: {fileID: 1448830596972770076, guid: 4ff7401ddea08954d86a0430699c32ae, type: 3}
       propertyPath: _playerMovement
       value: 
       objectReference: {fileID: 553319702}
     - target: {fileID: 1448830596972770076, guid: 4ff7401ddea08954d86a0430699c32ae, type: 3}
       propertyPath: _healths.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1448830596972770076, guid: 4ff7401ddea08954d86a0430699c32ae, type: 3}
       propertyPath: _healths.Array.data[0]
       value: 
-      objectReference: {fileID: 184603999}
+      objectReference: {fileID: 184604005}
     - target: {fileID: 1448830596972770076, guid: 4ff7401ddea08954d86a0430699c32ae, type: 3}
       propertyPath: _healths.Array.data[1]
       value: 
-      objectReference: {fileID: 553319704}
+      objectReference: {fileID: 0}
     - target: {fileID: 1448830596972770076, guid: 4ff7401ddea08954d86a0430699c32ae, type: 3}
       propertyPath: _playerAnimatorController
       value: 

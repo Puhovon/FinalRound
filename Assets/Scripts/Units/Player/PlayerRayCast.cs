@@ -1,5 +1,6 @@
 using System;
 using Units.Abstract;
+using Units.Enemy;
 using Units.Player;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ public class PlayerRayCast : MonoBehaviour
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
-         if (Input.GetMouseButtonDown(0) && hit.collider.TryGetComponent(out IDamagable damagable))
+         if (Input.GetMouseButtonDown(0) && hit.collider.TryGetComponent(out EnemyHealth damagable))
                 damagable.ApplyDamage(1);
         
     }

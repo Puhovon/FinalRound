@@ -1,4 +1,5 @@
 ﻿using Units.Abstract;
+using Units.Player;
 using UnityEngine;
 
 namespace Units.Universal
@@ -17,9 +18,9 @@ namespace Units.Universal
         {
             try
             {
-                if (other.transform.parent.TryGetComponent(out IDamagable damagable))
+                if (other.transform.parent.TryGetComponent(out PlayerHealth health))
                 {
-                    damagable.ApplyDamage(damage);
+                    health.ApplyDamage(damage);
                     Destroy(gameObject);
                 }
                 
