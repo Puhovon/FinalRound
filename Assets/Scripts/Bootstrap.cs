@@ -1,30 +1,27 @@
 using System.Collections.Generic;
 using UI;
-using Units.Enemy;
+using Units.Abstract;
 using Units.Player;
 using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] private UIGame _UIGame;
-    [SerializeField] private PlayerMovement _playerMovement;
-    [SerializeField] private PlayerAnimatorController _playerAnimatorController;
+    [SerializeField] private UIGame uIGame;
+    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerAnimatorController playerAnimatorController;
     [SerializeField] private ParticleSystem gunParticle;
-    [SerializeField] private int MaxAmmo;
-    [SerializeField] private List<EnemyHealth> _healths;
-    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private int maxAmmo;
+    [SerializeField] private List<Health> healths;
+    [SerializeField] private PlayerHealthComponent playerHealthComponent;
     private PlayerAttack _playerAttack;
 
-    void Start()
+    private void Start()
     {
-        _playerAttack = new PlayerAttack(this,gunParticle, MaxAmmo);
-        _playerMovement.Initialize(_playerAttack);
-        _playerAnimatorController.Initialize();
-        _UIGame.Instantiate(MaxAmmo);
-        _playerHealth.Initialize();
-        foreach (var health in _healths)
-        {
-            health.Initialize();
-        }
+        _playerAttack = new PlayerAttack(this, gunParticle, maxAmmo);
+        playerMovement.Initialize(_playerAttack);
+        playerAnimatorController.Initialize();
+        uIGame.Instantiate(maxAmmo);
+        foreach (var health in healths) health.Initialize();
+        playerHealthComponent.Initialize();
     }
 }

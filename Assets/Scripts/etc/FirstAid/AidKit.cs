@@ -1,6 +1,5 @@
 using System;
 using Units.Abstract;
-using Units.Player;
 using UnityEngine;
 
 public class AidKit : MonoBehaviour
@@ -16,9 +15,8 @@ public class AidKit : MonoBehaviour
     {
         try
         {
-            if (other.transform.parent.TryGetComponent(out PlayerHealth heallable))
+            if (other.transform.parent.TryGetComponent(out IHeallable heallable))
             {
-                print(typeof(PlayerHealth));
                 heallable.ApplyHeal(healPoint);
                 _animator.SetTrigger("Taked");
                 

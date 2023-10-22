@@ -1,37 +1,56 @@
-﻿using Units.Abstract;
+﻿using UI;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Units.Abstract
 {
-    public abstract class Health : MonoBehaviour, IDamagable
+    public class Health : MonoBehaviour, IDamagable
     {
         [Header("Health Stats")]
         [SerializeField] private int maxHealth;
         [SerializeField] private int currentHealth;
         
-        public ParticleSystem psBlood;
+        [SerializeField] private ParticleSystem psBlood;
 
         public int MaxHealth
         {
             get => maxHealth;
         }
+
         public int CurrentHealth
         {
             get => currentHealth;
             set => currentHealth = value;
         }
-        
         public UnityEvent onDeath = new UnityEvent();
-
-        public virtual void Initialize()
+        public UnityEvent<int> onApplyDamage = new UnityEvent<int>();
+        
+        
+        public void Initialize()
         {
             currentHealth = maxHealth;
         }
-        
-        public abstract void ApplyDamage(int damage);
-        
-        public abstract void Death();
 
+
+        public void ApplyDamage(int damage)
+        {
+            psBlood.Play();
+            if (currentHealth - damage > 0)
+            {
+                currentHealth -= damage;
+                onApplyDamage?.Invoke(currentHealth);                
+            }
+            else
+            {
+                if (TryGetComponent(out IDeadable dead))
+                {
+                    dead.Die();
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
     }
 }

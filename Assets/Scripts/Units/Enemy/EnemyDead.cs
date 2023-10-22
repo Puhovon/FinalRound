@@ -4,24 +4,21 @@ using UnityEngine;
 
 namespace Units.Enemy
 {
-    public class EnemyHealth : Health, IDamagable
+    [RequireComponent(typeof(Health))]
+    public class EnemyDead : MonoBehaviour, IDeadable
     {
-        public override void ApplyDamage(int damage)
+        private Health _health;
+        
+        private void Awake()
         {
-            CurrentHealth -= damage;
-            psBlood.Play();
-            if (CurrentHealth <= 0)
-            {
-                CurrentHealth = 0;
-                Death();
-            }
+            _health = GetComponent<Health>();
         }
 
-        public override void Death()
+        public void Die()
         {
             Destroy(this);
             UIEvents.onScoreChanged?.Invoke();
-            onDeath?.Invoke();
+            _health.onDeath?.Invoke();
             if (transform.TryGetComponent(out Animator animator))
                 animator.SetTrigger("Death");
             else

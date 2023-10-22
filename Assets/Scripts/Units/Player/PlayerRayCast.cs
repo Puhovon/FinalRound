@@ -27,7 +27,7 @@ public class PlayerRayCast : MonoBehaviour
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
-         if (Input.GetMouseButtonDown(0) && hit.collider.TryGetComponent(out EnemyHealth damagable))
+         if (Input.GetMouseButtonDown(0) && hit.collider.TryGetComponent(out Health damagable))
                 damagable.ApplyDamage(1);
         
     }

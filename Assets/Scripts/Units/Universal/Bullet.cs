@@ -18,7 +18,7 @@ namespace Units.Universal
         {
             try
             {
-                if (other.transform.parent.TryGetComponent(out PlayerHealth health))
+                if (other.transform.parent.TryGetComponent(out IDamagable health))
                 {
                     health.ApplyDamage(damage);
                     Destroy(gameObject);
