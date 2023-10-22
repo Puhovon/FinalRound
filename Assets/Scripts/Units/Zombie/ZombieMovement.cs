@@ -1,7 +1,5 @@
-using System.Collections;
+using Units.Abstract;
 using Units.Enemy;
-using Units.Player;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 

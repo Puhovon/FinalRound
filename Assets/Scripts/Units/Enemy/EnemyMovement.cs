@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Units.Player;
+using Units.Abstract;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,7 +13,7 @@ namespace Units.Enemy
         [SerializeField] private float TimeToRevert;
         private float currentTimeToRevert;
         private Rigidbody rb;
-        private int i;
+        private int increment;
         private bool faceRight = false;
         private Quaternion currentQuaternion;
         private NavMeshAgent agent;
@@ -51,20 +51,20 @@ namespace Units.Enemy
                 case IdleState:
                     EnemyEvents.onWalked?.Invoke(false);
                     currentTimeToRevert += Time.deltaTime;
-                    if (i == points.Length)
+                    if (increment == points.Length)
                     {
-                        i = 0;
+                        increment = 0;
                     }
 
                     break;
                 case WalkState:
-                    agent.destination = points[i].position;
-                    print(points[i].name);
+                    agent.destination = points[increment].position;
+                    print(points[increment].name);
                     EnemyEvents.onWalked?.Invoke(true);
                     if (agent.remainingDistance < 0.01f)
                     {
                         currentState = IdleState;
-                        i++;
+                        increment++;
                     }
 
                     break;

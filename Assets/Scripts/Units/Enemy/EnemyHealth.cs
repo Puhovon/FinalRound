@@ -1,31 +1,18 @@
 ﻿using UI;
 using Units.Abstract;
-using Units.Player;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Units.Enemy
 {
     public class EnemyHealth : Health, IDamagable
     {
-        [SerializeField] private int maxHealth;
-
-        [SerializeField] private int _currentHealth;
-        [SerializeField] private ParticleSystem psBlood;
-        public UnityEvent onDeath = new UnityEvent();
-
-        public override void Initialize()
-        {
-            _currentHealth = maxHealth;
-        }
-
         public override void ApplyDamage(int damage)
         {
-            _currentHealth -= damage;
+            CurrentHealth -= damage;
             psBlood.Play();
-            if (_currentHealth <= 0)
+            if (CurrentHealth <= 0)
             {
-                _currentHealth = 0;
+                CurrentHealth = 0;
                 Death();
             }
         }

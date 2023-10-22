@@ -14761,6 +14761,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4625264166337985193, guid: 06ee5fd9738e54c46a08e90812b46295, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 4806854995305589273, guid: 06ee5fd9738e54c46a08e90812b46295, type: 3}
       propertyPath: psBlood
       value: 
@@ -14822,6 +14826,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7614950371184521967, guid: 06ee5fd9738e54c46a08e90812b46295, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 7614950371184521967, guid: 06ee5fd9738e54c46a08e90812b46295, type: 3}
       propertyPath: m_Name
       value: RifleStopper2
       objectReference: {fileID: 0}
@@ -14841,7 +14849,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.63
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3522642997683403747, guid: 06ee5fd9738e54c46a08e90812b46295, type: 3}
+    - {fileID: 967664924265358487, guid: 06ee5fd9738e54c46a08e90812b46295, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8990106759116237705, guid: 06ee5fd9738e54c46a08e90812b46295, type: 3}
     m_AddedGameObjects:
